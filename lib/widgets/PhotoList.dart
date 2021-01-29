@@ -1,5 +1,6 @@
 import 'package:awesome_app/api/photosApi.dart';
 import 'package:awesome_app/models/photoModel.dart';
+import 'package:awesome_app/views/detailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -43,17 +44,43 @@ class _PhotoListState extends State<PhotoList> {
         itemCount: dats.length,
         itemBuilder: (context, index) {
           return Center(
-            child: Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.album),
-                    title: Text(dats[index].id.toString() +
-                        ' - ' +
-                        dats[index].id.toString()),
-                    subtitle: Text(dats[index].photographer),
-                  )
-                ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailPage(
+                            large: dats[index].src.large,
+                            photographer: dats[index].photographer,
+                            photographerUrl: dats[index].photographerUrl,
+                          )),
+                );
+              },
+              child: Card(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Column(
+                  children: [
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Hero(
+                            tag: dats[index].src.large,
+                            child: SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Image.network(dats[index].src.medium,
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Text(dats[index].id.toString() + ' - '),
+                          Text(dats[index].photographer)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           );

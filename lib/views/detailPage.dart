@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {
   final String large;
@@ -11,6 +12,14 @@ class DetailPage extends StatelessWidget {
     this.photographer,
     this.photographerUrl,
   }) : super(key: key);
+
+  urlLauncher() async {
+    if (await canLaunch(photographerUrl)) {
+      await launch(photographerUrl);
+    } else {
+      throw 'Cound not launc $photographerUrl';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +58,26 @@ class DetailPage extends StatelessWidget {
           Container(
               margin: EdgeInsets.all(20),
               child: Align(
-                  alignment: Alignment.centerLeft, child: Text(photographer)))
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        photographer,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          if (await canLaunch(photographerUrl)) {
+                            await launch(photographerUrl);
+                          } else {
+                            throw 'Cound not launc $photographerUrl';
+                          }
+                        },
+                        icon: Icon(Icons.send),
+                      ),
+                    ],
+                  )))
         ],
       ),
     );

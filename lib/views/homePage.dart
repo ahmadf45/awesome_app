@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/photoModel.dart';
 import 'package:http/http.dart';
 import '../widgets/PhotoGrid.dart';
 import '../widgets/PhotoList.dart';
