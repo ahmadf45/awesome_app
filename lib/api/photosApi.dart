@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:awesome_app/models/photoModel.dart';
 
@@ -28,13 +29,24 @@ class PhotosApi {
         throw Exception('Failed to load ${response.statusCode}');
       }
     } on TimeoutException catch (e) {
+      throw Failure('Timeout Error');
       print('Timeout Error : $e');
     } on SocketException catch (e) {
+      throw Failure('Socket Error');
       print('Socket Error: $e');
     } on Error catch (e) {
+      throw Failure('General Error');
       print('General Error: $e');
     }
-
-    // return parseData(response.body);
   }
+}
+
+class Failure {
+  // Use something like "int code;" if you want to translate error messages
+  final String message;
+
+  Failure(this.message);
+
+  @override
+  String toString() => message;
 }

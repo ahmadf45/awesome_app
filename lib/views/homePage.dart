@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../widgets/PhotoGrid.dart';
@@ -88,13 +90,35 @@ class _HomePageState extends State<HomePage> {
           child: FutureBuilder(
             future: PhotosApi().fetchData(Client(), 1),
             builder: (context, snapshot) {
-              if (snapshot.hasError) print(snapshot.error);
+              if (snapshot.hasError)
+                return Center(
+                    child: Text(
+                  'Please check your internet connection!',
+                  style: TextStyle(fontSize: 20),
+                  maxLines: 2,
+                ));
 
               return snapshot.hasData
                   ? ((view == "grid")
                       ? PhotoGrid(dats: snapshot.data)
                       : PhotoList(dats: snapshot.data))
                   : Center(child: CircularProgressIndicator());
+
+              // if (!snapshot.hasData) {
+              //   if (snapshot.connectionState == ConnectionState.waiting) {
+              //     return Center(child: CircularProgressIndicator());
+              //   }
+              // } else if (snapshot.hasError) {
+              //   return Container(
+              //     width: 0.0,
+              //     height: 0.0,
+              //     child: Center(child: Text('Error Connection!')),
+              //   );
+              // } else if (view == "grid") {
+              //   return PhotoGrid(dats: snapshot.data);
+              // } else {
+              //   return PhotoList(dats: snapshot.data);
+              // }
             },
           ),
         ),
