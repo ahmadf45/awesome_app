@@ -53,6 +53,9 @@ flutter:
   assets:
     - lib/images/projectbg.jpg
     - lib/images/play.png
+    - lib/images/white.jpg
+    - lib/images/dark.jpg
+    - lib/images/ww.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

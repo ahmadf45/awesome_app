@@ -61,6 +61,7 @@ class _PhotoGridState extends State<PhotoGrid> {
             child: Hero(
               tag: dats[index].src.large,
               child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: Image.network(dats[index].src.medium, fit: BoxFit.cover),
               ),
             ),

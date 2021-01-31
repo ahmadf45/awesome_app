@@ -57,7 +57,10 @@ class _PhotoListState extends State<PhotoList> {
                 );
               },
               child: Card(
-                margin: EdgeInsets.only(bottom: 20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                elevation: 1,
+                margin: EdgeInsets.only(bottom: 30),
                 child: Column(
                   children: [
                     Container(
@@ -69,8 +72,13 @@ class _PhotoListState extends State<PhotoList> {
                             child: SizedBox(
                               height: 100,
                               width: 100,
-                              child: Image.network(dats[index].src.medium,
-                                  fit: BoxFit.cover),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5)),
+                                child: Image.network(dats[index].src.medium,
+                                    fit: BoxFit.cover),
+                              ),
                             ),
                           ),
                           SizedBox(width: 20),

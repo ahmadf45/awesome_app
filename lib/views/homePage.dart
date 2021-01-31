@@ -32,11 +32,11 @@ class _HomePageState extends State<HomePage> {
               floating: false,
               pinned: true,
               snap: false,
-              elevation: 0,
+              elevation: 5,
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: EdgeInsets.only(top: 20),
                 background: Image.asset(
-                  'lib/images/projectbg.jpg',
+                  'lib/images/ww.jpg',
                   fit: BoxFit.cover,
                 ),
                 centerTitle: true,
