@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:awesome_app/models/photoModel.dart';
 
@@ -29,14 +28,14 @@ class PhotosApi {
         throw Exception('Failed to load ${response.statusCode}');
       }
     } on TimeoutException catch (e) {
-      throw Failure('Timeout Error');
-      print('Timeout Error : $e');
+      throw Exception('Timeout Error $e');
+      // print('Timeout Error : $e');
     } on SocketException catch (e) {
-      throw Failure('Socket Error');
-      print('Socket Error: $e');
+      throw Exception('Socket Error $e');
+      //print('Socket Error: $e');
     } on Error catch (e) {
-      throw Failure('General Error');
-      print('General Error: $e');
+      throw Exception('General Error $e');
+      //print('General Error: $e');
     }
   }
 }

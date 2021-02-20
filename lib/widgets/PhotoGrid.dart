@@ -15,6 +15,7 @@ class PhotoGrid extends StatefulWidget {
 class _PhotoGridState extends State<PhotoGrid> {
   final List<Photos> dats;
   int page = 1;
+  //ScrollController scrollController;
   ScrollController scrollController = new ScrollController();
 
   _PhotoGridState(this.dats);

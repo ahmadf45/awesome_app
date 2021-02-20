@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../widgets/PhotoGrid.dart';
@@ -14,11 +12,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String view = "grid";
+  ScrollController scrollController;
+  ScrollNotification notification;
 
   @override
   void initState() {
     super.initState();
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    //scrollController.addListener(notification);
   }
 
   @override
@@ -100,7 +101,9 @@ class _HomePageState extends State<HomePage> {
 
               return snapshot.hasData
                   ? ((view == "grid")
-                      ? PhotoGrid(dats: snapshot.data)
+                      ? PhotoGrid(
+                          dats: snapshot.data,
+                        )
                       : PhotoList(dats: snapshot.data))
                   : Center(child: CircularProgressIndicator());
 
